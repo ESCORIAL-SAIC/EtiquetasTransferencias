@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Etiquetas.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Impresora" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ZplEtiqueta" Type="System.String" Scope="User">
+      <Value Profile="(Default)">^XA \n ^FO20,30^A0N,40,38^FDDesc: #DESCRIPCION#^FS \n ^FO20,90^A0N,40,38^FDCodigo: #CODIGO#^FS \n ^FO20,150^A0N,40,38^FDCantidad: #CANTIDAD# U.^FS \n ^FO100,260^BY3 \n ^BCN,200,Y,N,N,N \n ^FD#CODIGOETIQUETA#^FS \n ^XZ</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
