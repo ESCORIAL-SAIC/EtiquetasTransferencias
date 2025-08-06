@@ -1,0 +1,63 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-release:
+    runs-on: windows-latest
+    env:
+      SOLUTION_NAME: EtiquetasTransferencias.sln
+      PROJECT_PATH: EtiquetasTransferencias/EtiquetasTransferencias.csproj
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore $env:SOLUTION_NAME
+
+      - name: Build
+        run: dotnet build $env:SOLUTION_NAME --configuration Release --no-restore
+
+      - name: Publish app
+        run: dotnet publish $env:PROJECT_PATH -c Release -o publish
+
+      - name: Zip published files
+        run: Compress-Archive -Path publish\* -DestinationPath publish.zip
+
+      - name: Generate version (SemVer)
+        id: versioning
+        run: |
+          $version = "v$(Get-Date -Format 'yyyy.MM.dd.HHmm')"
+          echo "version=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+      - name: Commit & Tag version
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git tag ${{ steps.versioning.outputs.version }}
+          git push origin ${{ steps.versioning.outputs.version }}
+      - name: Generate changelog
+        id: changelog
+        uses: mikepenz/release-changelog-builder-action@v4
+        with:
+          configuration: ".github/changelog-config.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.versioning.outputs.version }}
+          name: Release ${{ steps.versioning.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          files: publish.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
