@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInicio));
             GpbImpresion = new GroupBox();
             LblFormato = new Label();
             CmbFormato = new ComboBox();
@@ -332,9 +333,9 @@
             Controls.Add(GpbEtiquetas);
             Controls.Add(GpbImpresion);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FrmInicio";
-            ShowIcon = false;
             Text = "Etiquetas Transferencias";
             Load += FrmInicio_Load;
             GpbImpresion.ResumeLayout(false);

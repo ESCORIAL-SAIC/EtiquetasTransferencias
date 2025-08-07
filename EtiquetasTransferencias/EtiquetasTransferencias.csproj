@@ -6,9 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageIcon>escorial_icon.ico</PackageIcon>
+    <ApplicationIcon>assets\escorial_icon.ico</ApplicationIcon>
 	<!--<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 	<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>-->
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="assets\escorial_icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
@@ -23,6 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EncriptaDesencriptaCadena">
+      <HintPath>lib\EncriptaDesencriptaCadena.dll</HintPath>
+    </Reference>
     <Reference Include="EscoBLLCore">
       <HintPath>..\..\EscoBLL\EscoBLLCore\bin\Release\net8.0-windows7.0\EscoBLLCore.dll</HintPath>
     </Reference>
@@ -37,6 +46,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="assets\escorial_icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="lib\EscoBLLCore.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
