@@ -23,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EncriptaDesencriptaCadena">
+      <HintPath>lib\EncriptaDesencriptaCadena.dll</HintPath>
+    </Reference>
     <Reference Include="EscoBLLCore">
       <HintPath>..\..\EscoBLL\EscoBLLCore\bin\Release\net8.0-windows7.0\EscoBLLCore.dll</HintPath>
     </Reference>
